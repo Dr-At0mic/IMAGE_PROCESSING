@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-img = cv2.cvtColor(cv2.imread('parrot.jpg'), cv2.COLOR_BGR2RGB)
+img = cv2.cvtColor(cv2.imread('./assets/parrot.jpg'), cv2.COLOR_BGR2RGB)
 r, c = img.shape[:2]; crow, ccol = r//2, c//2
 U, V = np.meshgrid(np.arange(c), np.arange(r)); D = np.sqrt((V-crow)**2 + (U-ccol)**2)
 filters = {
