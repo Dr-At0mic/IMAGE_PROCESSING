@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-img = cv2.imread("cat.jpeg")
+img = cv2.imread("./assets/cat.jpeg")
 img_gray = cv2.imread("cat.jpeg",0)
 img=cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 smoothed = cv2.blur(img_gray, (3,3))   
