@@ -8,7 +8,7 @@ def psnr(original, compressed):
     return 20 * log10(255.0 / sqrt(mse))
 img = cv2.imread("./assets/cat.jpg")
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-cv2.imwrite("./output/program10.png", cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
+cv2.imwrite("original.png", cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
 formats = ["jpg", "png", "webp"]
 print("Format | File Size (KB) | PSNR (dB)")
 print("-----------------------------------")
