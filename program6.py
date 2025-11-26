@@ -1,27 +1,56 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-img = cv2.cvtColor(cv2.imread('parrot.jpg'), cv2.COLOR_BGR2RGB)
-r, c = img.shape[:2]; crow, ccol = r//2, c//2
-U, V = np.meshgrid(np.arange(c), np.arange(r)); D = np.sqrt((V-crow)**2 + (U-ccol)**2)
-filters = {
-    'Ideal': lambda D, D0, n=2: (D <= D0).astype(float),
-    'Butterworth': lambda D, D0, n=2: 1 / (1 + (D/D0)**(2*n)),
-    'Gaussian': lambda D, D0, n=2: np.exp(-(D**2)/(2*(D0**2)))
-}
-def apply(img, H, hp=False):
-    if hp: H = 1 - H
-    return cv2.merge([np.abs(np.fft.ifft2(np.fft.ifftshift(np.fft.fftshift(np.fft.fft2(img[:,:,i])) * H))) for i in range(3)]).astype(np.uint8)
-results = {'Original': img}
-for name, func in filters.items():
-    H = func(D, 30)
-    results[f'{name} LPF'] = apply(img, H)
-    results[f'{name} HPF'] = apply(img, H, hp=True)
-plt.figure(figsize=(14, 8))
-for i, (k, v) in enumerate(results.items()):
-    plt.subplot(2, 4, i+1);
-    plt.imshow(v);
-    plt.title(k);
+img = cv2.imread("cat.jpeg")
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+# ---------- Step 2: Add Gaussian Noise ----------
+def add_gaussian_noise(image, mean=0, var=0.01):
+    noise = np.random.normal(mean, var**0.5, image.shape)
+    noisy_img = np.clip(image / 255 + noise, 0, 1)
+    return np.uint8(noisy_img * 255)
+
+# ---------- Step 3: Add Salt-and-Pepper Noise ----------
+def add_salt_pepper_noise(image, amount=0.02):
+    noisy = np.copy(image)
+    total_pixels = image.size // 3
+    num_salt = int(amount * total_pixels / 2)
+    num_pepper = num_salt
+
+    # Salt noise (white pixels)
+    coords = [np.random.randint(0, i - 1, num_salt) for i in image.shape[:2]]
+    noisy[coords[0], coords[1]] = [255, 255, 255]
+
+    # Pepper noise (black pixels)
+    coords = [np.random.randint(0, i - 1, num_pepper) for i in image.shape[:2]]
+    noisy[coords[0], coords[1]] = [0, 0, 0]
+    return noisy
+
+# ---------- Step 4: Filtering ----------
+def apply_filters(noisy_img):
+    mean_filtered = cv2.blur(noisy_img, (3, 3))  # Mean filter
+    median_filtered = cv2.medianBlur(noisy_img, 3)  # Median filter
+    adaptive_filtered = cv2.bilateralFilter(noisy_img, 9, 75, 75)  # Adaptive (bilateral)
+    return mean_filtered, median_filtered, adaptive_filtered
+
+# ---------- Step 5: Process ----------
+gaussian_noisy = add_gaussian_noise(img)
+sp_noisy = add_salt_pepper_noise(img)
+
+mean_g, median_g, adaptive_g = apply_filters(gaussian_noisy)
+mean_sp, median_sp, adaptive_sp = apply_filters(sp_noisy)
+
+# ---------- Step 6: Display ----------
+titles = ['Original', 'Gaussian Noise', 'Mean', 'Median', 'Adaptive',
+          'Salt & Pepper Noise', 'Mean', 'Median', 'Adaptive']
+images = [img, gaussian_noisy, mean_g, median_g, adaptive_g,
+          sp_noisy, mean_sp, median_sp, adaptive_sp]
+
+plt.figure(figsize=(10, 8))
+for i in range(9):
+    plt.subplot(3, 3, i + 1)
+    plt.imshow(images[i])
+    plt.title(titles[i])
     plt.axis('off')
-plt.tight_layout();
+plt.tight_layout()
 plt.show()
