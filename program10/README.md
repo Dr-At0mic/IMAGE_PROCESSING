@@ -6,6 +6,40 @@ Evaluate the trade-offs between compression ratio and image quality for differen
 ## Aim
 To evaluate and compare different image compression formats (JPEG, PNG, WebP) by analyzing the trade-off between file size (compression ratio) and image quality (measured using PSNR).
 
+## Algorithm
+
+**Step 1**: Load original image and convert BGR to RGB
+   - Read image: `img = cv2.imread(path)`
+   - Convert: `img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)`
+
+**Step 2**: Save original image for reference
+
+**Step 3**: For each compression format (JPEG, PNG, WebP):
+   - Save image in format: `cv2.imwrite(filename, image)`
+   - Read compressed image back: `compressed = cv2.imread(filename)`
+   - Convert compressed image to RGB
+
+**Step 4**: Calculate Mean Squared Error (MSE)
+   - Compute pixel-wise squared difference: `diff = (original - compressed)²`
+   - Calculate mean: `MSE = mean(diff)`
+
+**Step 5**: Calculate PSNR (Peak Signal-to-Noise Ratio)
+   - If MSE = 0: return 100 (perfect match)
+   - Otherwise: `PSNR = 20 * log10(255 / sqrt(MSE))`
+   - Higher PSNR indicates better quality
+
+**Step 6**: Calculate file size
+   - Get file size in bytes: `size_bytes = os.path.getsize(filename)`
+   - Convert to KB: `size_kb = size_bytes / 1024`
+
+**Step 7**: Store results
+   - Store compressed image, file size, and PSNR value
+   - Print format, file size, and PSNR in table format
+
+**Step 8**: Display comparison
+   - Create subplot layout with original and all compressed versions
+   - Show file size and PSNR in title for each image
+
 ## Program Logic
 
 1. **Image Loading**: Read the input image and convert from BGR to RGB color space.

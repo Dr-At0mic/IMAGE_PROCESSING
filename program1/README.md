@@ -6,6 +6,20 @@ Write Python code to perform histogram equalization on a grayscale image. Displa
 ## Aim
 To implement histogram equalization on a grayscale image to enhance image contrast by redistributing pixel intensities uniformly across the histogram.
 
+## Algorithm
+
+**Step 1**: Load grayscale image from file path using `cv.imread()` with flag 0
+
+**Step 2**: Apply histogram equalization to the image using `cv.equalizeHist(img)`
+   - Compute histogram of pixel intensities
+   - Calculate cumulative distribution function (CDF)
+   - Map each pixel intensity to new value: `new_intensity = round((L-1) * CDF(intensity))`
+   - Where L is the number of intensity levels (256)
+
+**Step 3**: Concatenate original and equalized images horizontally using `np.hstack()`
+
+**Step 4**: Save the combined result image to output directory using `cv.imwrite()`
+
 ## Program Logic
 
 1. **Image Loading**: Read a grayscale image using OpenCV's `imread()` function with flag 0 (grayscale mode).

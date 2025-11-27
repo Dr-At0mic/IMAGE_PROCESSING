@@ -6,6 +6,41 @@ Generate synthetic noisy images using different noise models (e.g., Gaussian, sa
 ## Aim
 To generate noisy images using different noise models and apply various filtering techniques to reduce noise and restore image quality.
 
+## Algorithm
+
+**Step 1**: Load original image and convert BGR to RGB
+
+**Step 2**: Add Gaussian noise
+   - Generate noise matrix: `noise = normal(mean=0, std=sqrt(variance), size=image_shape)`
+   - Normalize image to [0,1]: `normalized = image / 255`
+   - Add noise: `noisy = normalized + noise`
+   - Clip to [0,1] and convert back: `noisy_image = uint8(clip(noisy, 0, 1) * 255)`
+
+**Step 3**: Add salt-and-pepper noise
+   - Calculate number of pixels to corrupt: `num_pixels = amount * total_pixels / 2`
+   - Generate random coordinates for salt noise (white pixels = 255)
+   - Generate random coordinates for pepper noise (black pixels = 0)
+   - Set pixels at coordinates to extreme values
+
+**Step 4**: Apply mean filter
+   - For each pixel, replace with average of 3×3 neighborhood
+   - Use `cv2.blur(image, (3, 3))`
+
+**Step 5**: Apply median filter
+   - For each pixel, replace with median of 3×3 neighborhood
+   - Use `cv2.medianBlur(image, 3)`
+
+**Step 6**: Apply adaptive (bilateral) filter
+   - Consider both spatial distance and intensity difference
+   - Use `cv2.bilateralFilter(image, d=9, sigmaColor=75, sigmaSpace=75)`
+   - Preserves edges while smoothing
+
+**Step 7**: Process both noisy images
+   - Apply all three filters to Gaussian noisy image
+   - Apply all three filters to salt-and-pepper noisy image
+
+**Step 8**: Display results in 3×3 grid layout
+
 ## Program Logic
 
 1. **Image Loading**: Read and convert image from BGR to RGB color space.

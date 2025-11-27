@@ -6,6 +6,35 @@ Implement ideal, Butterworth, and Gaussian frequency domain filters for smoothin
 ## Aim
 To implement and compare three types of frequency domain filters (Ideal, Butterworth, and Gaussian) for both low-pass (smoothing) and high-pass (sharpening) operations.
 
+## Algorithm
+
+**Step 1**: Load image and get dimensions
+   - Read image and convert BGR to RGB
+   - Get image dimensions: `rows, cols = img.shape[:2]`
+   - Calculate center: `center_row = rows // 2`, `center_col = cols // 2`
+
+**Step 2**: Create distance matrix
+   - Generate coordinate meshgrid: `U, V = meshgrid([0..cols-1], [0..rows-1])`
+   - Calculate Euclidean distance from center: `D = sqrt((V - center_row)² + (U - center_col)²)`
+
+**Step 3**: Define filter transfer functions (cutoff D0 = 30)
+   - Ideal Low-Pass: `H(u,v) = 1 if D(u,v) ≤ D0, else 0`
+   - Butterworth Low-Pass: `H(u,v) = 1 / (1 + (D(u,v)/D0)^(2n))` where n=2
+   - Gaussian Low-Pass: `H(u,v) = exp(-D(u,v)² / (2*D0²))`
+
+**Step 4**: Apply filters to each color channel
+   - For each channel i in [R, G, B]:
+     - Compute FFT: `F = fftshift(fft2(channel_i))`
+     - Multiply with filter: `F_filtered = F * H`
+     - Compute inverse FFT: `channel_filtered = abs(ifft2(ifftshift(F_filtered)))`
+   - Merge channels: `result = merge([R_filtered, G_filtered, B_filtered])`
+
+**Step 5**: Generate high-pass filters
+   - For each filter H: `H_highpass = 1 - H`
+   - Apply same process as Step 4 with high-pass filter
+
+**Step 6**: Display all results in 2×4 grid (original + 7 filtered versions)
+
 ## Program Logic
 
 1. **Image Preprocessing**:

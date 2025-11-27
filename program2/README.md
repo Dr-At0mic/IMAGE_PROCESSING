@@ -6,6 +6,26 @@ Implement a smoothing spatial filter (e.g., averaging filter) and a sharpening s
 ## Aim
 To implement and apply spatial filters for image smoothing and sharpening using convolution operations.
 
+## Algorithm
+
+**Step 1**: Load image from file and convert from BGR to RGB color space
+
+**Step 2**: Define smoothing filter kernel
+   - Create 3×3 matrix filled with 1/9: `kernel_smooth = [[1/9, 1/9, 1/9], [1/9, 1/9, 1/9], [1/9, 1/9, 1/9]]`
+
+**Step 3**: Define sharpening filter kernel
+   - Create Laplacian kernel: `kernel_sharpen = [[0, -1, 0], [-1, 4, -1], [0, -1, 0]]`
+
+**Step 4**: Apply smoothing filter using convolution
+   - For each pixel (i, j) in image, compute: `output[i,j] = sum(kernel_smooth * image[i-1:i+2, j-1:j+2])`
+   - Use `cv2.filter2D()` to perform 2D convolution
+
+**Step 5**: Apply sharpening filter using convolution
+   - For each pixel (i, j) in image, compute: `output[i,j] = sum(kernel_sharpen * image[i-1:i+2, j-1:j+2])`
+   - Use `cv2.filter2D()` to perform 2D convolution
+
+**Step 6**: Display original, smoothed, and sharpened images in subplot layout
+
 ## Program Logic
 
 1. **Image Loading**: Read an image and convert it from BGR to RGB color space for proper display.

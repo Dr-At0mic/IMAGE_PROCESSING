@@ -6,6 +6,42 @@ Implement lossless compression techniques (e.g., Huffman coding) and lossy compr
 ## Aim
 To implement Huffman coding, a lossless compression algorithm that assigns variable-length binary codes to characters based on their frequency, ensuring more frequent characters have shorter codes.
 
+## Algorithm
+
+**Step 1**: Build Huffman Tree
+   - Count frequency of each character in input text
+   - Create leaf node for each unique character with its frequency
+   - Build min-heap (priority queue) from leaf nodes
+
+**Step 2**: Construct tree by merging nodes
+   - While heap has more than one node:
+     - Extract two nodes with minimum frequency: `node1 = heappop(heap)`, `node2 = heappop(heap)`
+     - Create internal node with frequency = `node1.freq + node2.freq`
+     - Set `node1` as left child, `node2` as right child
+     - Insert merged node back into heap
+   - Root of tree is the remaining node in heap
+
+**Step 3**: Generate Huffman codes
+   - Traverse tree recursively starting from root
+   - For left child: append '0' to current code
+   - For right child: append '1' to current code
+   - When leaf node reached: store `codes[character] = current_code`
+   - Return dictionary mapping characters to binary codes
+
+**Step 4**: Encode text
+   - For each character in input text:
+     - Lookup its Huffman code from dictionary
+     - Append code to encoded string
+   - Return complete binary encoded string
+
+**Step 5**: Decode binary string
+   - Start at root of Huffman tree
+   - For each bit in encoded string:
+     - If bit is '0': move to left child
+     - If bit is '1': move to right child
+     - If current node is leaf: append character to output, reset to root
+   - Return decoded text
+
 ## Program Logic
 
 1. **Node Class**: 

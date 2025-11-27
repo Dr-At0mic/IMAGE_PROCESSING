@@ -6,6 +6,30 @@ Utilize Python libraries (e.g., NumPy, OpenCV) to perform Fourier Transform on a
 ## Aim
 To perform 2D Fast Fourier Transform (FFT) on an image and visualize the frequency domain representation (magnitude spectrum).
 
+## Algorithm
+
+**Step 1**: Load image and convert to grayscale
+   - Read image using `cv2.imread()`
+   - Convert BGR to RGB for display
+   - Convert to grayscale: `gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)`
+
+**Step 2**: Apply 2D Fast Fourier Transform
+   - Compute FFT: `F = fft2(gray)`
+   - Result is complex-valued frequency domain representation
+
+**Step 3**: Shift zero frequency to center
+   - Apply `fftshift(F)` to move DC component from corner to center
+   - This centers low frequencies and places high frequencies at edges
+
+**Step 4**: Calculate magnitude spectrum
+   - Compute magnitude: `magnitude = abs(F_shifted)`
+   - Apply logarithmic scaling: `magnitude_spectrum = 20 * log(magnitude + 1)`
+   - Adding 1 prevents log(0) errors
+
+**Step 5**: Display results
+   - Create figure with 1×2 subplot layout
+   - Show original RGB image and magnitude spectrum side-by-side
+
 ## Program Logic
 
 1. **Image Preprocessing**:
