@@ -67,6 +67,16 @@ This repository contains image processing programs covering various topics inclu
 
 ---
 
+## [Program 8: Edge Detection](./program8/README.md)
+
+**Question**: Implement edge detection techniques (e.g., Sobel operator, Canny edge detector) to detect edges in an image. Display the original image and edge-detected results.
+
+**Aim**: To implement and compare different edge detection techniques (Sobel operator and Canny edge detector) to identify boundaries and edges in an image.
+
+[View Program Details →](./program8/README.md)
+
+---
+
 ## [Program 9: Lossless Compression (Huffman Coding)](./program9/README.md)
 
 **Question**: Implement lossless compression techniques (e.g., Huffman coding) and lossy compression techniques (e.g., JPEG compression) using Python.
@@ -112,6 +122,9 @@ IMAGE_PROCESSING/
 │   ├── main.py
 │   └── README.md
 ├── program6/            # Noise Models and Filtering
+│   ├── main.py
+│   └── README.md
+├── program8/            # Edge Detection
 │   ├── main.py
 │   └── README.md
 ├── program9/            # Huffman Coding
