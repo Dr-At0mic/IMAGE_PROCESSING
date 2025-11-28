@@ -67,6 +67,16 @@ This repository contains image processing programs covering various topics inclu
 
 ---
 
+## [Program 7: Filter Performance Comparison](./program7/README.md)
+
+**Question**: Compare the performance of these filters on noisy images in terms of restoration quality.
+
+**Aim**: To compare and evaluate the performance of different noise reduction filters (mean, median, and Wiener filters) on images corrupted with Gaussian noise and salt-and-pepper noise, assessing their restoration quality.
+
+[View Program Details →](./program7/README.md)
+
+---
+
 ## [Program 8: Edge Detection](./program8/README.md)
 
 **Question**: Implement edge detection algorithms (e.g., Sobel, Canny) using Python.
@@ -122,6 +132,9 @@ IMAGE_PROCESSING/
 │   ├── main.py
 │   └── README.md
 ├── program6/            # Noise Models and Filtering
+│   ├── main.py
+│   └── README.md
+├── program7/            # Filter Performance Comparison
 │   ├── main.py
 │   └── README.md
 ├── program8/            # Edge Detection
