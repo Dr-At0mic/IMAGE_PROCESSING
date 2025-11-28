@@ -80,3 +80,7 @@ for i in range(3):
 plt.show()
 ```
 
+## Output
+
+![Filters Applied to Grayscale Image](../output/program3.png)
+

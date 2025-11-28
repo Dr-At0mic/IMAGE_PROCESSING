@@ -67,3 +67,7 @@ for i, (title, result) in enumerate(filter.items(), 1):
 plt.show()
 ```
 
+## Output
+
+![Spatial Filters Result](../output/program2.png)
+

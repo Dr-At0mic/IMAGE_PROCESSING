@@ -172,3 +172,7 @@ print("Encoded :", encoded)
 print("Decoded :", decoded)
 ```
 
+## Output
+
+![Huffman Coding Result](../output/program9.png)
+

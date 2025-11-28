@@ -1,6 +1,5 @@
 """
-Question 8: Implement edge detection techniques (e.g., Sobel operator, Canny edge detector) to detect edges in an image.
-Display the original image and edge-detected results.
+Question 8: Implement edge detection algorithms (e.g., Sobel, Canny) using Python.
 """
 
 import cv2

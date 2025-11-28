@@ -69,7 +69,7 @@ This repository contains image processing programs covering various topics inclu
 
 ## [Program 8: Edge Detection](./program8/README.md)
 
-**Question**: Implement edge detection techniques (e.g., Sobel operator, Canny edge detector) to detect edges in an image. Display the original image and edge-detected results.
+**Question**: Implement edge detection algorithms (e.g., Sobel, Canny) using Python.
 
 **Aim**: To implement and compare different edge detection techniques (Sobel operator and Canny edge detector) to identify boundaries and edges in an image.
 

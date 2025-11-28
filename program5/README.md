@@ -110,3 +110,7 @@ plt.tight_layout()
 plt.show()
 ```
 
+## Output
+
+![Frequency Domain Filters Result](../output/program5.png)
+

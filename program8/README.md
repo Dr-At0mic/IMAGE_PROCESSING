@@ -1,7 +1,7 @@
 # Program 8: Edge Detection
 
 ## Question
-Implement edge detection techniques (e.g., Sobel operator, Canny edge detector) to detect edges in an image. Display the original image and edge-detected results.
+Implement edge detection algorithms (e.g., Sobel, Canny) using Python.
 
 ## Aim
 To implement and compare different edge detection techniques (Sobel operator and Canny edge detector) to identify boundaries and edges in an image.
@@ -107,4 +107,8 @@ for i in range(3):
     plt.axis("off")
 plt.show()
 ```
+
+## Output
+
+![Edge Detection Result](../output/program8.png)
 

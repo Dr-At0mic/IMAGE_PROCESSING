@@ -53,3 +53,7 @@ res = np.hstack((img, equ))
 cv.imwrite('./output/program1.png', res)
 ```
 
+## Output
+
+![Histogram Equalization Result](../output/program1.png)
+

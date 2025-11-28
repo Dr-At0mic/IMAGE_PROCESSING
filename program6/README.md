@@ -154,3 +154,7 @@ plt.tight_layout()
 plt.show()
 ```
 
+## Output
+
+![Noise Models and Filtering Result](../output/program6.png)
+

@@ -88,3 +88,7 @@ plt.axis("off")
 plt.show()
 ```
 
+## Output
+
+![Fourier Transform Result](../output/program4.png)
+

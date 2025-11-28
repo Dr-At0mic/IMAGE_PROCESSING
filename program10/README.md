@@ -134,3 +134,9 @@ for i in range(len(images)):
 plt.show()
 ```
 
+## Output
+
+![Compression Comparison - Part 1](../output/program10/program10.1.png)
+
+![Compression Comparison - Part 2](../output/program10/program10.2.png)
+
